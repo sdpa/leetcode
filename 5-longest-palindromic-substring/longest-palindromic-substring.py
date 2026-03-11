@@ -1,25 +1,23 @@
 class Solution:
-    def getPalid(self,i, j, s):
-        while i >= 0 and j < len(s) and s[i] == s[j]:
-            i-=1
-            j+=1
-        return s[i+1:j]
-
     def longestPalindrome(self, s: str) -> str:
-        # expand from center. 
-        longest = ""
-        if len(s) <= 1:
-            return s
+
+        def getPalindrome(left, right, s):
+            while left >= 0 and right < len(s) and s[left] == s[right]:
+                left -= 1
+                right += 1
+            return s[left+1:right]
+
+        res = ""
         for i in range(len(s)):
-            even = self.getPalid(i, i, s)
-            odd = self.getPalid(i, i + 1, s)
+            # Expand from center and check if its palindrome
+            s_a = getPalindrome(i, i, s)
+            s_b = getPalindrome(i, i+1, s)
+            if len(s_a) > len(res):
+                res = s_a
+            if len(s_b) > len(res):
+                res = s_b
+        return res
+            
 
-            if len(even) > len(odd):
-                cur_longest = even
-            elif len(odd) > len(even):
-                cur_longest = odd
 
-            if len(cur_longest) > len(longest):
-                longest =   cur_longest      
-        return longest
-
+        
