@@ -1,33 +1,25 @@
 class Solution:
     def numIslands(self, grid: List[List[str]]) -> int:
-
-        # For each cell in the grid perfrom a dfs search. End DFS if you reach the end or reach a 0
-        # The number of islands is the number of times you perfrom dfs.
-        rows = len(grid)
-        cols = len(grid[0])
-        def dfs(r, c):
-            if r < 0 or r >= rows or c < 0 or c >= cols or grid[r][c] == '0':
+        def dfs(r,c,matrix):
+            if r < 0 or c < 0 or r >= len(matrix) or c >= len(matrix[0]):
                 return
-            
-            grid[r][c] = '0'
-            
-            # Top, Right, Botton, Left.
-            dfs(r-1, c)
-            dfs(r, c+1)
-            dfs(r+1, c)
-            dfs(r, c-1)
-            
-            
+            if matrix[r][c] == '0':
+                return
+            if matrix[r][c] == '1':
+                matrix[r][c] = -1
+                dfs(r-1, c, matrix)
+                dfs(r, c+1, matrix)
+                dfs(r+1, c, matrix)
+                dfs(r, c-1, matrix)
 
-        count = 0
-        for r in range(rows):
-            for c in range(cols):
+
+        num = 0
+        for r in range(len(grid)):
+            for c in range(len(grid[0])):
                 if grid[r][c] == '1':
-                    dfs(r,c)
-                    count += 1
+                    dfs(r,c,grid)
+                    num += 1
+        return num
 
-        return count
         
-
-
         
