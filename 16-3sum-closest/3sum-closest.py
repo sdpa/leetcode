@@ -8,7 +8,7 @@ class Solution:
         # For each 3rd number, find the other 2 where their total sum is closes. i.e. abs(sum(i + j + k) - target)) is min
 
         diff = float('inf')
-        closes = 0
+        closest = 0
         nums.sort()
 
         for k in range(len(nums)):
