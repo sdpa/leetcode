@@ -21,11 +21,7 @@ class Solution:
                 dir_stack.append(element)
 
         # End, we join the dir_stack. 
-
         res = "/" + "/".join(dir_stack)
 
-        print(res)
-
         return res
-
         
